@@ -41,13 +41,15 @@ def integrate2( A , dt  ,x0 = 0.0 ,v0 = 0.0 ,gamma = 0.1  ):
 
 def calculate( df ):
 
-	A = df["AccX"].values - 9.8
+	df.columns = ["relative_time" , "acc" ]
+	A = df["acc"].values - 9.8
 	t = df["relative_time"].values/1000 #segs 
 	dt = t.max() - t.min()
 	vel = integrate.cumtrapz( A , dx = dt/A.size  )
 	pos = integrate.cumtrapz( vel , dx = dt/A.size  )
 
-	print( vel )
+	print( vel.max() )
+	print( pos.max() )
 	#print( A , dt )
 	#integrate ( A , dt  )
 
